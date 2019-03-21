@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Live shares
+{% endblock %}
+
+{% block main %}
+{% for value in values %}
+<div style="width: {{width}}; display: inline-block;">
+    {{ value[1] | safe }}
+    {{ value[0] | safe }}
+</div>
+{%endfor%}
+{% endblock %}

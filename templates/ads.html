@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Ads
+{% endblock %}
+
+{% block main %}
+    <form enctype=multipart/form-data action="/ads" method="post">
+        <div class="form-group">
+            <input required autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Stock Symbol" type="text"/>
+        </div>
+         <div class="form-group">
+            <input required autocomplete="off" autofocus class="form-control" name="image" placeholder="Enter an image" type="file"/>
+        </div>
+         <div class="form-group">
+            <input required autocomplete="off" autofocus class="form-control" name="alttext" placeholder="Enter alternative text" type="text"/>
+        </div>
+         <div class="form-group">
+            <input required autocomplete="off" autofocus class="form-control" name="desc" placeholder="Enter ad text" type="text"/>
+        </div>
+         <div class="form-group">
+            <input required autocomplete="off" autofocus class="form-control" name="link" placeholder="Enter hyperlink" type="text"/>
+        </div>
+         <div class="form-group">
+            <input required autocomplete="off" autofocus class="form-control" name="priority" placeholder="Enter priority(Integer between 1-5)" type="number"/>
+        </div>
+         <div class="form-group">
+            <input required autocomplete="off" autofocus class="form-control" name="duration" placeholder="Enter duration of add (In hours, integer)" type="number"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Place</button>
+    </form>
+{% endblock %}

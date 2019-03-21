@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <p>A share of {{ quote["symbol"] }} costs {{ quote["price"] | usd }}.</p>
+    <div class="container" align="left">
+			<embed type="image/svg+xml" src={{graph_data|safe}} style='max-width:1000px'/>
+	  </div>
+{% endblock %}

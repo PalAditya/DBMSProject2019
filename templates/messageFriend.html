@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Message Friend
+{% endblock %}
+
+{% block main %}
+    <form action="/messageFriend" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="friend" placeholder="Message text?" type="text" required/>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Email Password" type="password"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Message</button>
+    </form>
+</br>
+</br>
+
+  {%  for (k,v), (k2,v2), (k3,v3) in zip(ads1.items(), ads2.items(), ads3.items()): %}
+  <div class="card" style="width: 32%;margin:5px;display:inline-block">
+    <img class ="card-img-top" src="{{v['img']}}" alt="{{v['alt']}}">
+    <div class="card-body">
+      <p class="card-text">{{v['desc']}}</p>
+      <a href="{{v['link']}}" class="card-link">Visit</a>
+    </div>
+  </div>
+  <div class="card" style="width: 32%;margin:5px;display:inline-block">
+    <img class ="card-img-top" src="{{v2['img']}}" alt="{{v2['alt']}}">
+    <div class="card-body">
+      <p class="card-text">{{v2['desc']}}</p>
+      <a href="{{v2['link']}}" class="card-link">Visit</a>
+    </div>
+  </div>
+  <div class="card" style="width: 32%;margin:5px;display:inline-block">
+    <img class ="card-img-top" src="{{v3['img']}}" alt="{{v3['alt']}}">
+    <div class="card-body">
+      <p class="card-text">{{v3['desc']}}</p>
+      <a href="{{v3['link']}}" class="card-link">Visit</a>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}

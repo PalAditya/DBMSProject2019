@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}
+   Chart
+{% endblock %}
+{% block main %}
+<body class="body">
+	  <div class="container" align="left">
+			<embed type="image/svg+xml" src={{graph_data|safe}} style='max-width:1000px'/>
+	  </div>
+</body>
+{% endblock %}
