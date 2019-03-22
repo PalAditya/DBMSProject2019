@@ -9,13 +9,20 @@
 	"MSFT": {
 		"symbol": "MSFT",
 		"img": "/static/images/msft.jpg",
-		"alt": "Microsoft",
-		"desc": "Microsoft Corporation is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports and sells computer software, consumer electronics, personal computers, and related services.",
-		"link": "https://www.microsoft.com/en-in/"
+		"alt": "Apple",
+		"desc": "Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Four of technology along with Amazon, Google, and Facebook",
+		"link": "https://www.apple.com/in/"
 	},
-	"AAPL": {
-		"symbol": "AAPL",
-		"img": "/static/images/apple.jpg",
+	"NFLX3": {
+		"symbol": "NFLX3",
+		"img": "/static/images/NFLX.png",
+		"alt": "Netflix",
+		"desc": "Netflix, Inc. is an American media-services provider headquartered in Los Gatos, California, founded in 1997 by Reed Hastings and Marc Randolph in Scotts Valley, California. The company's primary business is its subscription-based streaming OTT service which offers online streaming of a library of films and television programs, including those produced in-house.",
+		"link": "https://www.netflix.com/in/"
+	},
+	"MSFT3": {
+		"symbol": "MSFT3",
+		"img": "/static/images/msft.jpg",
 		"alt": "Apple",
 		"desc": "Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Four of technology along with Amazon, Google, and Facebook",
 		"link": "https://www.apple.com/in/"
@@ -30,13 +37,6 @@
 	"MSFT2": {
 		"symbol": "MSFT2",
 		"img": "/static/images/msft.jpg",
-		"alt": "Microsoft",
-		"desc": "Microsoft Corporation is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports and sells computer software, consumer electronics, personal computers, and related services.",
-		"link": "https://www.microsoft.com/en-in/"
-	},
-	"AAPL2": {
-		"symbol": "AAPL2",
-		"img": "/static/images/apple.jpg",
 		"alt": "Apple",
 		"desc": "Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Four of technology along with Amazon, Google, and Facebook",
 		"link": "https://www.apple.com/in/"

@@ -128,7 +128,10 @@ def liveUpdate(symbol):
 
 def usd(value):
     """Format value as USD."""
-    return f"${value:,.2f}"
+    try:
+        return f"${value:,.2f}"
+    except Exception as e:
+        return value
 
 def getSeries():
     t=time.time()
@@ -200,6 +203,4 @@ def random_ads():
         #    ads[val['symbol']]=val
         ads[val['symbol']]=val
         a=a+1
-    print("Ads")
-    print(ads)
     return ads

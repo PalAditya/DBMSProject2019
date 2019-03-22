@@ -18,35 +18,24 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
+        <script src="/static/jquery.truncator.js"></script>
         <title>DBMS Project 2019: {% block title %}{% endblock %}</title>
 
+    <script>
+        $(function() {
+      $('.card').truncate({max_length: 100});
+    });
+    </script>
     <style>
-    .dropdown{
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      padding: 12px 16px;
-      z-index: 1;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+        .card-img-top{
+            height:250;
+        }
     </style>
-
     </head>
 
-    <body>
+    <body style="background-color:#c2c2a3">
 
-        <nav class="navbar navbar-expand-md navbar-light bg-light border">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark border">
             <!--<a class="navbar-brand" href="/"><span class="blue">C</span><span class="red">$</span><span class="yellow">5</span><span class="green">0</span> <span class="red">Finance</span></a>-->
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
@@ -60,14 +49,14 @@
                         <li class="nav-item"><a class="nav-link" href="/ads">Place your Adds</a></li>
                         <li class="nav-item"><a class="nav-link" href="/live">Live Updates</a></li>
                         <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Friends<div class="dropdown">Explore
-                        <div class="dropdown-content">
-                        <ul>
-                        <li><a href="/addFriend">Add friend</li>
-                        <li><a href="/deleteFriend">Delete friend</li>
-                        <li><a href="/messageFriend">Send messages</li>
-                        </ul></div></div></a></li>
-                        </ul>
+                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
+                        id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Friends</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/addFriend">Add friend</a>
+                        <a class="dropdown-item" href="/deleteFriend">Delete friend</a>
+                        <a class="dropdown-item" href="/messageFriend">Send messages</a>
+                        </div>
+                    </ul>
                     <ul class="navbar-nav ml-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/change_password">Change Password</a></li>
                         <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>

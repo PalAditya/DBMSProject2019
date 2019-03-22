@@ -61,39 +61,41 @@ def sendmail(message,sender,receiver,password):
 @login_required
 def index():
     """Show portfolio of stocks"""
-
-    # look up the current user
-    users = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
-    stocks = db.execute(
-        "SELECT symbol, SUM(shares) as total_shares FROM transactions WHERE user_id = :user_id GROUP BY symbol HAVING total_shares > 0", user_id=session["user_id"])
-    quotes = {}
-    #predict()
-    #regress()
-    #get_ads()
-    #print(random_ads())
-    predictedPrices=db.execute("SELECT symbol, price FROM predictions WHERE symbol IN (SELECT symbol FROM transactions WHERE user_id=:user_id)",
-                                user_id=session["user_id"])
-    spmap={}
-    a=0
-    for val in predictedPrices:
-        spmap[val["symbol"]]=a
-        a=a+1
-    #print(spmap)
-    #print(predictedPrices)
-    for stock in stocks:
-        quotes[stock["symbol"]] = lookup(stock["symbol"])
-        if quotes[stock["symbol"]] is None:
-            continue
-        print(stock["symbol"])
-        if stock["symbol"] in spmap:
-            quotes[stock["symbol"]+"p"]=predictedPrices[spmap[stock["symbol"]]]["price"]
-        else:
-            quotes[stock["symbol"]+"p"]=0
-    #print(quotes)
-    cash_remaining = users[0]["cash"]
-    total = cash_remaining
-    #sendmail()
-    return render_template("portfolio.html", quotes=quotes, stocks=stocks, total=total, cash_remaining=cash_remaining)
+    try:
+        # look up the current user
+        users = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
+        stocks = db.execute(
+            "SELECT symbol, SUM(shares) as total_shares FROM transactions WHERE user_id = :user_id GROUP BY symbol HAVING total_shares > 0", user_id=session["user_id"])
+        quotes = {}
+        predictedPrices=db.execute("SELECT symbol, price FROM predictions WHERE symbol IN (SELECT symbol FROM transactions WHERE user_id=:user_id)",
+                                    user_id=session["user_id"])
+        spmap={}
+        a=0
+        for val in predictedPrices:
+            spmap[val["symbol"]]=a
+            a=a+1
+        for stock in stocks:
+            quotes[stock["symbol"]] = lookup(stock["symbol"])
+            if quotes[stock["symbol"]] is None:
+                continue
+            print(stock["symbol"])
+            if stock["symbol"] in spmap:
+                quotes[stock["symbol"]+"p"]=predictedPrices[spmap[stock["symbol"]]]["price"]
+            else:
+                quotes[stock["symbol"]+"p"]=0
+        #print(quotes)
+        cash_remaining = users[0]["cash"]
+        total = cash_remaining
+        #sendmail()
+        if quotes is None or stocks is None:
+            return apology("Something went wrong, please access the page a little later")
+        return render_template("portfolio.html", quotes=quotes, stocks=stocks, total=total, cash_remaining=cash_remaining)
+    except:
+        val=random_ads()
+        ads1=dict(list(val.items())[0:2])
+        ads2=dict(list(val.items())[2:4])
+        ads3=dict(list(val.items())[4:6])
+        return render_template("quote.html",ads1=ads1,ads2=ads2,ads3=ads3)
 
 
 @app.route("/ads",methods=["GET", "POST"])
@@ -454,7 +456,11 @@ def quote():
         val=random_ads()
         ads1=dict(list(val.items())[0:2])
         ads2=dict(list(val.items())[2:4])
+        if len(ads2)<2:
+            ads2=ads1
         ads3=dict(list(val.items())[4:6])
+        if len(ads3)<2:
+            ads2=ads1
         return render_template("quote.html",ads1=ads1,ads2=ads2,ads3=ads3)
 
 @app.route("/register", methods=["GET", "POST"])
@@ -514,6 +520,8 @@ def chart():
         scripts.append(script)
         divs.append(div)
     values=list(zip(scripts, divs))
+    if len(scripts)==0:
+        return apology("Sorry, we can't seem to connect to server right now")
     return render_template("live.html",values=values,width=100/len(scripts))
 
 @app.route("/sell", methods=["GET", "POST"])
@@ -651,7 +659,7 @@ def get_ads():
 
 #run cron jobs
 scheduler = BackgroundScheduler()
+scheduler.add_job(func=predict, trigger="interval", seconds=3600)
 scheduler.add_job(func=get_ads, trigger="interval", seconds=3600)
-scheduler.add_job(func=regress, trigger="interval", seconds=3600)
-scheduler.add_job(func=predict, trigger="interval", seconds=3600*24)
+scheduler.add_job(func=regress, trigger="interval", seconds=3720)
 scheduler.start()
