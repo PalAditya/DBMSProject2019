@@ -1,0 +1,13 @@
+language: python
+python:
+      -3.6
+install: 
+     -pip install -r requirements.txt
+     -pip install codecov
+
+script:
+  - coverage erase
+  - coverage run test_webapp.py && coverage html
+
+after_success:
+  - codecov
