@@ -175,6 +175,7 @@ def predictHelper(symbol):
                 volume=row[5]
                 val={"open":openp,"high":high,"low":low,"close": close,"volume":volume}
                 data.append(val)
+            #print({"symbol":symbol,"data":data})
             return {"symbol":symbol,"data":data};
         except:
             return None

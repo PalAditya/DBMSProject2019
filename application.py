@@ -1,5 +1,5 @@
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, session, url_for, send_file
 from flask_session import Session
 from tempfile import mkdtemp
 import smtplib
@@ -10,6 +10,7 @@ import os
 import datetime
 import time
 import atexit
+import pdfkit
 from bokeh.embed import components
 from bokeh.plotting import figure
 from werkzeug.exceptions import default_exceptions
@@ -87,10 +88,15 @@ def index():
         cash_remaining = users[0]["cash"]
         total = cash_remaining
         #sendmail()
+        x=db.execute("SELECT Symbol,SUM(ABS(shares)) as t FROM transactions WHERE created_at >= date('now','-1 day') GROUP BY symbol ORDER BY t DESC LIMIT 3")
+        t="Today's most trending shares are: "+x[0]["symbol"]+" with "+str(x[0]["t"])+" transactions, "+x[1]["symbol"]+" wi"\
+        "th "+str(x[1]["t"])+" transactions and "+x[2]["symbol"]+" with "+str(x[2]["t"])+" transactions"
+        flash(t)
         if quotes is None or stocks is None:
             return apology("Something went wrong, please access the page a little later")
         return render_template("portfolio.html", quotes=quotes, stocks=stocks, total=total, cash_remaining=cash_remaining)
-    except:
+    except Exception as e:
+        print(e)
         val=random_ads()
         ads1=dict(list(val.items())[0:2])
         ads2=dict(list(val.items())[2:4])
@@ -324,7 +330,21 @@ def history():
 
     transactions = db.execute(
         "SELECT symbol, shares, price_per_share, created_at FROM transactions WHERE user_id = :user_id ORDER BY created_at ASC", user_id=session["user_id"])
-
+    try:
+        #print(request.url)
+        x=render_template("history.html", transactions=transactions)
+        print(x)
+        x=x.split()
+        x=x[:len(x)-39]
+        x.append('</main>')
+        x.append("</body>")
+        x.append("</html>")
+        x=" ".join(x)
+        config=pdfkit.configuration(wkhtmltopdf='../../wkhtmltox/bin/wkhtmltopdf')
+        pdfkit.from_string(x,'out.pdf',configuration=config)
+        #pdfkit.from_url(request.url,'out.pdf',configuration=config)
+    except Exception as e:
+        print(e)
     return render_template("history.html", transactions=transactions)
 
 
@@ -421,6 +441,19 @@ def login():
         return render_template("login.html")
 
 
+@app.route("/download", methods=["GET", "POST"])
+@login_required
+def download():
+    try:
+        return send_file('out.pdf',attachment_filename='transactions.pdf')
+    except Exception as e:
+        print(e)
+    val=random_ads()
+    ads1=dict(list(val.items())[0:2])
+    ads2=dict(list(val.items())[2:4])
+    ads3=dict(list(val.items())[4:6])
+    return render_template("quote.html",ads1=ads1,ads2=ads2,ads3=ads3)
+
 @app.route("/logout")
 def logout():
     """Log user out"""
@@ -438,7 +471,6 @@ def quote():
     """Get stock quote."""
     if request.method == "POST":
         quote = lookup(request.form.get("symbol"))
-
         if quote == None:
             return apology("invalid symbol", 400)
         res=liveUpdate(request.form.get("symbol"))
@@ -456,11 +488,7 @@ def quote():
         val=random_ads()
         ads1=dict(list(val.items())[0:2])
         ads2=dict(list(val.items())[2:4])
-        if len(ads2)<2:
-            ads2=ads1
         ads3=dict(list(val.items())[4:6])
-        if len(ads3)<2:
-            ads2=ads1
         return render_template("quote.html",ads1=ads1,ads2=ads2,ads3=ads3)
 
 @app.route("/register", methods=["GET", "POST"])

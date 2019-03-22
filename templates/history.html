@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-    <table class="table table-striped">
+    <table class="table table-dark table-striped table-bordered table-hover">
         <thead>
             <tr>
                 <th>Symbol</th>
@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             {% for transaction in transactions %}
-                <tr>
+                <tr >
                     <td>{{ transaction.symbol }}</td>
                     <td>{{ transaction.shares }}</td>
                     <td>{{ (transaction.shares * transaction.price_per_share) | abs | usd }}</td>
@@ -25,4 +25,20 @@
             {% endfor %}
         </tbody>
     </table>
+    <style>
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+</style>
+    <button type="button" onclick="window.location.href='../download'" class="btn"><i class="fa fa-download"></i> Download</button>
 {% endblock %}
