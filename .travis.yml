@@ -8,7 +8,7 @@ install:
 
 script:
   - coverage erase
-  - coverage run test_webapp.py && coverage html
+  - coverage run application.py
 
 after_success:
   - codecov
