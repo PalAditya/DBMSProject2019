@@ -6,3 +6,4 @@ pygal
 numpy
 sklearn
 gunicorn
+pdfkit
