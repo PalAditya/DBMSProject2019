@@ -47,7 +47,7 @@ Session(app)
 
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///finance.db")
+db = SQL("postgres://nbijlhjpeekddf:f375c34ecc857deef29fa138f22255f09cd8dc838cb00484d0a77c210ac3ddf7@ec2-75-101-131-79.compute-1.amazonaws.com:5432/de9nhilj3vjb53")
 
 def sendmail(message,sender,receiver,password):
     s = smtplib.SMTP('smtp.gmail.com', 587)
