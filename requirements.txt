@@ -5,3 +5,4 @@ bokeh
 pygal
 numpy
 sklearn
+gunicorn
