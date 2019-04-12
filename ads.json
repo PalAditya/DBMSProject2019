@@ -9,36 +9,57 @@
 	"MSFT": {
 		"symbol": "MSFT",
 		"img": "/static/images/msft.jpg",
+		"alt": "Microsoft",
+		"desc": "Microsoft Corporation is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports and sells computer software, consumer electronics, personal computers, and related services.",
+		"link": "https://www.microsoft.com/en-in/"
+	},
+	"AAPL": {
+		"symbol": "AAPL",
+		"img": "/static/images/apple.jpg",
 		"alt": "Apple",
 		"desc": "Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Four of technology along with Amazon, Google, and Facebook",
 		"link": "https://www.apple.com/in/"
 	},
-	"NFLX3": {
-		"symbol": "NFLX3",
-		"img": "/static/images/NFLX.png",
-		"alt": "Netflix",
-		"desc": "Netflix, Inc. is an American media-services provider headquartered in Los Gatos, California, founded in 1997 by Reed Hastings and Marc Randolph in Scotts Valley, California. The company's primary business is its subscription-based streaming OTT service which offers online streaming of a library of films and television programs, including those produced in-house.",
-		"link": "https://www.netflix.com/in/"
+	"FB": {
+		"symbol": "FB",
+		"img": "/static/images/fb.png",
+		"alt": "Facebook",
+		"desc": "Facebook, Inc. is an American online social media and social networking service company. It is based in Menlo Park, California. It was founded by Mark Zuckerberg, along with fellow Harvard College students and roommates Eduardo Saverin, Andrew McCollum, Dustin Moskovitz and Chris Hughes. It is considered one of the Big Four technology companies along with Amazon, Apple, and Google.",
+		"link": "www.facebook.com"
 	},
-	"MSFT3": {
-		"symbol": "MSFT3",
-		"img": "/static/images/msft.jpg",
-		"alt": "Apple",
-		"desc": "Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Four of technology along with Amazon, Google, and Facebook",
-		"link": "https://www.apple.com/in/"
+	"AMZN": {
+		"symbol": "AMZN",
+		"img": "/static/images/amzn.png",
+		"alt": "Amazon",
+		"desc": "Amazon is the largest e-commerce marketplace and cloud computing platform in the world as measured by revenue and market capitalization.[7] Amazon.com was founded by Jeff Bezos on July 5, 1994, and started as an online bookstore but later diversified to sell video downloads/streaming, MP3 downloads/streaming, audiobook downloads/streaming, software, video games, electronics, apparel, furniture, food, toys, and jewelry.",
+		"link": "www.amazon.com"
 	},
-	"NFLX2": {
-		"symbol": "NFLX2",
-		"img": "/static/images/NFLX.png",
-		"alt": "Netflix",
-		"desc": "Netflix, Inc. is an American media-services provider headquartered in Los Gatos, California, founded in 1997 by Reed Hastings and Marc Randolph in Scotts Valley, California. The company's primary business is its subscription-based streaming OTT service which offers online streaming of a library of films and television programs, including those produced in-house.",
-		"link": "https://www.netflix.com/in/"
+	"GOOGL": {
+		"symbol": "GOOGL",
+		"img": "/static/images/googl.png",
+		"alt": "Google",
+		"desc": "Google LLC[5] is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple and Facebook.The company's rapid growth since incorporation has triggered a chain of products, acquisitions, and partnerships beyond Google's core search engine (Google Search). It offers services designed for work and productivity (Google Docs, Google Sheets, and Google Slides), email (Gmail/Inbox), scheduling and time management (Google Calendar), cloud storage (Google Drive), instant messaging and video chat (Google Allo, Duo, Hangouts), language translation (Google Translate), mapping and navigation (Google Maps, Waze, Google Earth, Street View), video sharing (YouTube), note-taking (Google Keep), and photo organizing and editing (Google Photos). The company leads the development of the Android mobile operating system, the Google Chrome web browser, and Chrome OS, a lightweight operating system based on the Chrome browser.",
+		"link": "www.google.com"
 	},
-	"MSFT2": {
-		"symbol": "MSFT2",
-		"img": "/static/images/msft.jpg",
-		"alt": "Apple",
-		"desc": "Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Four of technology along with Amazon, Google, and Facebook",
-		"link": "https://www.apple.com/in/"
+	"ADBE": {
+		"symbol": "ADBE",
+		"img": "/static/images/adbe.png",
+		"alt": "Adobe",
+		"desc": "Adobe Inc. (/\u0259\u02c8do\u028abi\u02d0/ \u0259-DOH-bee) is an American multinational computer software company headquartered in San Jose, California. It has historically focused upon the creation of multimedia and creativity software products, with a more recent foray towards digital marketing software. Adobe is best known for its deprecated Adobe Flash web software ecosystem, Photoshop image editing software, Acrobat Reader, the Portable Document Format (PDF), and Adobe Creative Suite, as well as its successor Adobe Creative Cloud.",
+		"link": "www.adobe.com"
+	},
+	"ORCL": {
+		"symbol": "ORCL",
+		"img": "/static/images/orcl.jpg",
+		"alt": "Oracle",
+		"desc": "Oracle Corporation is an American multinational computer technology corporation headquartered in Redwood Shores, California. The company specializes primarily in developing and marketing database software and technology, cloud engineered systems, and enterprise software products \u2014 particularly its own brands of database management systems. In 2018, Oracle was the third-largest software maker by revenue, after Microsoft and Alphabet.",
+		"link": "www.oracle.com"
+	},
+	"ACN": {
+		"symbol": "ACN",
+		"img": "/static/images/acn.png",
+		"alt": "Accenture",
+		"desc": "Accenture is a global management consulting and professional services firm that provides strategy, consulting, digital, technology and operations services. A Fortune Global 500 company,[5] it has been incorporated in Dublin, Ireland, since 1 September 2009. In 2018, the company reported net revenues of $39.6 billion, with more than 459,000 employees[3] serving clients in more than 200 cities in 120 countries.[6] In 2015, the company had about 150,000 employees in India,[7] about 48,000 in the US,[8] and about 50,000 in the Philippines",
+		"link": "www.accenture.com"
 	}
 }

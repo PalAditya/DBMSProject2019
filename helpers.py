@@ -193,14 +193,20 @@ def random_ads():
     with open('ads.json') as f:
         data=json.load(f)
     #print(data)
-    #p=[random.randint(1,len(data)) for _ in range(6)]
-    #p=set(p)
-    p=[1,2,3,4,5,6]
+    p=[random.randint(1,len(data)) for _ in range(6)]
+    for i in range(8):
+        if len(set(p))==6:
+            break
+        if i not in p:
+            p.append(i)
     p=set(p)
+    #p=[1,2,3,4,5,6]
+    #p=set(p)
+    print(p)
     ads={}
     for val in data.values():
-        #if a in p:
-        #    ads[val['symbol']]=val
-        ads[val['symbol']]=val
+        if a in p:
+            ads[val['symbol']]=val
+        #ads[val['symbol']]=val
         a=a+1
     return ads

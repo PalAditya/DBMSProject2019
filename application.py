@@ -90,9 +90,17 @@ def index():
         total = cash_remaining
         #sendmail()
         x=db.execute("SELECT Symbol,SUM(ABS(shares)) as t FROM transactions WHERE created_at >= date('now','-1 day') GROUP BY symbol ORDER BY t DESC LIMIT 3")
-        print(x)
-        t="Today's most trending shares are: "+x[0]["symbol"]+" with "+str(x[0]["t"])+" transactions, "+x[1]["symbol"]+" wi"\
-        "th "+str(x[1]["t"])+" transactions and "+x[2]["symbol"]+" with "+str(x[2]["t"])+" transactions"
+        #print(x)
+        if len(x)>=3:
+            t="Today's most trending shares are: "+x[0]["symbol"]+" with "+str(x[0]["t"])+" transactions, "+x[1]["symbol"]+" wi"\
+            "th "+str(x[1]["t"])+" transactions and "+x[2]["symbol"]+" with "+str(x[2]["t"])+" transactions"
+        elif len(x)==2:
+            t="Today's most trending shares are: "+x[0]["symbol"]+" with "+str(x[0]["t"])+" transactions, "+x[1]["symbol"]+" wi"\
+            "th "+str(x[1]["t"])+" transactions"
+        elif len(x)==1:
+            t="Today's most trending shares are: "+x[0]["symbol"]+" with "+str(x[0]["t"])+" transactions"
+        else:
+            t="Sorry, no transactions have been done yet"
         flash(t)
         if quotes is None or stocks is None:
             return apology("Something went wrong, please access the page a little later")
@@ -292,37 +300,40 @@ def deleteFriend():
 @app.route("/messageFriend",methods=["GET", "POST"])
 @login_required
 def messageFriend():
-    val=random_ads()
-    ads1=dict(list(val.items())[0:2])
-    ads2=dict(list(val.items())[2:4])
-    ads3=dict(list(val.items())[4:6])
-    if request.method == "POST":
-        message=request.form.get("friend")
-        password=request.form.get("password")
-        val=db.execute("SELECT * FROM friends WHERE uid=:user_id",user_id=session["user_id"])
-        set1=set()
-        list1=[]
-        myEmail=""
-        if val[0]["f1"] is not None:
-            set1.add(val[0]["f1"]);
-        if val[0]["f2"] is not None:
-            set1.add(val[0]["f2"]);
-        if val[0]["f3"] is not None:
-            set1.add(val[0]["f3"]);
-        if val[0]["f4"] is not None:
-            set1.add(val[0]["f4"]);
-        if val[0]["f5"] is not None:
-            set1.add(val[0]["f5"]);
-        val=db.execute("SELECT id, email FROM users");
-        for user in val:
-            if user["id"] in set1:
-                list1.append(user["email"])
-            if user["id"]==session["user_id"]:
-                myEmail=user["email"];
-        #print(list1)
-        for a in list1:
-            sendmail(message,myEmail,a,password)
-        return render_template("quote.html",ads1=ads1,ads2=ads2,ads3=ads3)
+    try:
+        val=random_ads()
+        ads1=dict(list(val.items())[0:2])
+        ads2=dict(list(val.items())[2:4])
+        ads3=dict(list(val.items())[4:6])
+        if request.method == "POST":
+            message=request.form.get("friend")
+            password=request.form.get("password")
+            val=db.execute("SELECT * FROM friends WHERE uid=:user_id",user_id=session["user_id"])
+            set1=set()
+            list1=[]
+            myEmail=""
+            if val[0]["f1"] is not None:
+                set1.add(val[0]["f1"]);
+            if val[0]["f2"] is not None:
+                set1.add(val[0]["f2"]);
+            if val[0]["f3"] is not None:
+                set1.add(val[0]["f3"]);
+            if val[0]["f4"] is not None:
+                set1.add(val[0]["f4"]);
+            if val[0]["f5"] is not None:
+                set1.add(val[0]["f5"]);
+            val=db.execute("SELECT id, email FROM users");
+            for user in val:
+                if user["id"] in set1:
+                    list1.append(user["email"])
+                if user["id"]==session["user_id"]:
+                    myEmail=user["email"];
+            print(list1)
+            for a in list1:
+                sendmail(message,myEmail,a,password)
+            return render_template("quote.html",ads1=ads1,ads2=ads2,ads3=ads3)
+    except:
+        return apology("Sorry, non-secure access to gmail not permitted")
     return render_template("messageFriend.html",ads1=ads1,ads2=ads2,ads3=ads3)
 
 @app.route("/history")
@@ -491,6 +502,12 @@ def quote():
         ads1=dict(list(val.items())[0:2])
         ads2=dict(list(val.items())[2:4])
         ads3=dict(list(val.items())[4:6])
+        print("Ads1")
+        print(ads1)
+        print("Ads2")
+        print(ads2)
+        print("Ads3")
+        print(ads3)
         return render_template("quote.html",ads1=ads1,ads2=ads2,ads3=ads3)
 
 @app.route("/register", methods=["GET", "POST"])
@@ -562,6 +579,12 @@ def sell():
     ads1=dict(list(val.items())[0:2])
     ads2=dict(list(val.items())[2:4])
     ads3=dict(list(val.items())[4:6])
+    print("Ads1")
+    print(ads1)
+    print("Ads2")
+    print(ads2)
+    print("Ads3")
+    print(ads3)
     if request.method == "POST":
         quote = lookup(request.form.get("symbol"))
 
