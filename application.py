@@ -49,6 +49,7 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///finance.db")
 
+#Sends mail to users
 def sendmail(message,sender,receiver,password):
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
@@ -502,12 +503,12 @@ def quote():
         ads1=dict(list(val.items())[0:2])
         ads2=dict(list(val.items())[2:4])
         ads3=dict(list(val.items())[4:6])
-        print("Ads1")
+        '''print("Ads1")
         print(ads1)
         print("Ads2")
         print(ads2)
         print("Ads3")
-        print(ads3)
+        print(ads3)'''
         return render_template("quote.html",ads1=ads1,ads2=ads2,ads3=ads3)
 
 @app.route("/register", methods=["GET", "POST"])
@@ -549,6 +550,7 @@ def register():
     else:
         return render_template("register.html")
 
+#Get value from alphavantage and send it for plotting
 @app.route("/live")
 @login_required
 def chart():
@@ -612,14 +614,13 @@ def sell():
         # Query database for username
         rows = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
 
-        # How much $$$ the user still has in her account
+        # How much money the user still has in her account
         cash_remaining = rows[0]["cash"]
         price_per_share = quote["price"]
 
         # Calculate the price of requested shares
         total_price = price_per_share * shares
 
-        # Book keeping (TODO: should be wrapped with a transaction)
         db.execute("UPDATE users SET cash = cash + :price WHERE id = :user_id", price=total_price, user_id=session["user_id"])
         db.execute("INSERT INTO transactions (user_id, symbol, shares, price_per_share) VALUES(:user_id, :symbol, :shares, :price)",
                    user_id=session["user_id"],
@@ -647,6 +648,7 @@ def errorhandler(e):
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
 
+#For linear regression
 def predict():
     shares=db.execute("SELECT DISTINCT symbol FROM transactions")
     d={}

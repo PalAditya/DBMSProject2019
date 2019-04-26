@@ -116,7 +116,7 @@ def liveUpdate(symbol):
 
         #print(high)
         #print(low)
-        # Return stock's name (as a str), price (as a float), and (uppercased) symbol (as a str)
+        # Return stock's name (as a str), price (as a float), and (uppercased) symbol (as a str) in a dict
         return {
             "high": high,
             "low": low,
@@ -154,6 +154,7 @@ def predictHelper(symbol):
 
     # Query Alpha Vantage for quote
     # https://www.alphavantage.co/documentation/
+	#Set your own API key as an environment variable before starting
     try:
 
         # GET CSV
@@ -183,11 +184,13 @@ def predictHelper(symbol):
     except:
         return None
 
+#Only these files can be placed as ads
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+#Randomize the ads stored in dbms and hence file
 def random_ads():
     a=1
     with open('ads.json') as f:
